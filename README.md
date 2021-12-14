@@ -1,2 +1,2 @@
 # Python-Analysis-Tool
-A Kotlin application to analysis python files to obfuscate the code
+A Kotlin application to dynamicly analysis python files
