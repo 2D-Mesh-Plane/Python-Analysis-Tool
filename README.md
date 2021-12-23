@@ -1,2 +1,2 @@
 # Python-Analysis-Tool
-A Kotlin application to dynamicly analysis python files
+A Kotlin application to dynamically analyse Python files.
