@@ -20,8 +20,9 @@ class Root(file: SplitFile) {
         for(line in lines){
             var indent = 0
             for(c in line){
-                if(c.equals("\t")) indent++
+                if(c == ' ') indent++
             }
+            indent /= 4
             if(indent == 0) {
                 val node = Node(line, indent)
                 masterNodes.add(node)
@@ -29,7 +30,14 @@ class Root(file: SplitFile) {
                 val childNode = Node(line, indent)
                 if(masterNodes.isEmpty())continue
 
-                val parentNode = masterNodes.last()
+                var parentNode = masterNodes.last()
+
+                if(indent > 1) {
+                    for (i in 0..indent) {
+                        parentNode = parentNode.childrenNodes.last()
+                        if(parentNode.nodeLevel + 1 == indent)break
+                    }
+                }
 
                 childNode.parentNode = parentNode
                 parentNode.childrenNodes.add(childNode)

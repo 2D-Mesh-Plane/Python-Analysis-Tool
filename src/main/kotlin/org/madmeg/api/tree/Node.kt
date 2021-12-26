@@ -22,11 +22,11 @@ class Node(value: String, nodeLevel: Int) {
     fun printNode(){
         var wSpace = ""
         if(nodeLevel > 0){
-            for(i in 0..nodeLevel){
-                wSpace+="\t"
+            for(i in 1 until nodeLevel - 1){
+                wSpace+="    "
             }
         }
-        println(wSpace + value)
+        println("$wSpace$value $nodeLevel")
         for(node in childrenNodes){
             node.printNode()
         }
