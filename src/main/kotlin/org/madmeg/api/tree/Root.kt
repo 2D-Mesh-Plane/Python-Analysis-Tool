@@ -10,16 +10,17 @@ import org.madmeg.api.elements.SplitFile
 
 class Root(file: SplitFile) {
     var masterNodes: ArrayList<Node> = ArrayList()
-    val lines: ArrayList<String>
+    private val lines: ArrayList<String>
     init {
         this.lines = file.lines
         compileTree()
     }
 
-    fun compileTree(){
+    private fun compileTree(){
         for(line in lines){
             var indent = 0
             for(c in line){
+                if(c != ' ')break
                 if(c == ' ') indent++
             }
             indent /= 4

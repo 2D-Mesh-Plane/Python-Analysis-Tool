@@ -19,16 +19,23 @@ class Node(value: String, nodeLevel: Int) {
         childrenNodes = ArrayList()
     }
 
+    fun hasChildren(): Boolean{
+        return childrenNodes.isNotEmpty()
+    }
+
     fun printNode(){
-        var wSpace = ""
-        if(nodeLevel > 0){
-            for(i in 1 until nodeLevel - 1){
-                wSpace+="    "
-            }
-        }
-        println("$wSpace$value $nodeLevel")
+        println("$value $nodeLevel")
         for(node in childrenNodes){
             node.printNode()
         }
+    }
+
+    fun getMasterNode(): Node? {
+        var master = parentNode
+        for(i in 0..nodeLevel){
+            if(master.nodeLevel == 0)break
+            master = master.parentNode
+        }
+        return master!!
     }
 }
