@@ -47,9 +47,47 @@ class Root(file: SplitFile) {
     }
 
     fun printTree(){
+
         for(node in masterNodes){
             node.printNode()
         }
+    }
+
+
+    fun search(search: (Node) -> Boolean): Node? {
+        for(node in masterNodes){
+            if(search(node)){
+                return node
+            }
+
+            val result =  node.search(search)
+
+            if(result != null){
+                return result
+            }
+
+        }
+
+        return null
+    }
+
+
+    fun findRegex(search: (Node) -> String): Node? {
+        for (node in masterNodes){
+            val regex = search(node).toRegex()
+
+            if(regex.matches(node.value)){
+                return node
+            }
+
+            val result = node.findRegex(search)
+
+            if(result != null){
+                return result
+            }
+        }
+
+        return null
     }
 
 }

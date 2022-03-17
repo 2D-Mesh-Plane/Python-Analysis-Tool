@@ -21,7 +21,6 @@ fun main(){
 
     if(!file.exists()){
         error("The file " + file.name + " doesnt exist!")
-        exitProcess(-1)
     }
     println("Loading File")
     loader.load(file)

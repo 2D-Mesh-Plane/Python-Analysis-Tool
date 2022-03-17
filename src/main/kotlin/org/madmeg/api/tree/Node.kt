@@ -30,12 +30,49 @@ class Node(value: String, nodeLevel: Int) {
         }
     }
 
-    fun getMasterNode(): Node? {
+    fun getMasterNode(): Node {
         var master = parentNode
         for(i in 0..nodeLevel){
             if(master.nodeLevel == 0)break
             master = master.parentNode
         }
-        return master!!
+        return master
     }
+
+
+    fun search(search: (Node) -> Boolean): Node? {
+        for(node in childrenNodes){
+            if(search(node)){
+                return node
+            }
+
+            val result =  node.search(search)
+
+            if(result != null){
+                return result
+            }
+        }
+
+        return null
+    }
+
+
+    fun findRegex(search: (Node) -> String): Node? {
+        for (node in childrenNodes){
+            val regex = search(node).toRegex()
+
+            if(regex.matches(node.value)){
+                return node
+            }
+
+            val result =  node.findRegex(search)
+
+            if(result != null){
+                return result
+            }
+        }
+
+        return null
+    }
+
 }
